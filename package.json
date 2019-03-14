@@ -1,0 +1,22 @@
+{
+  "name": "darjun",
+  "version": "1.0.0",
+  "description": "My hugo blog",
+  "main": "index.js",
+  "scripts": {
+    "algolia": "atomic-algolia"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhaohuabing/zhaohuabing.github.io.git"
+  },
+  "author": "Darjun Lee",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/zhaohuabing/zhaohuabing.github.io/issues"
+  },
+  "homepage": "https://github.com/zhaohuabing/zhaohuabing.github.io#readme",
+  "dependencies": {
+    "atomic-algolia": "^0.3.15"
+  }
+}
