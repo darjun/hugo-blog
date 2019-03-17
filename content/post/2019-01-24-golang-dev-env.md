@@ -4,7 +4,7 @@ title:      "搭建go开发环境"
 subtitle:   "\"goto go\""
 date:       2019-01-28T22:05:08
 author:     "darjun"
-image: "/img/post-bg-2015.jpg"
+image: "/img/background2.jpg"
 tags:
     - go
 URL: "/2019/01/24/golang-dev-env/"

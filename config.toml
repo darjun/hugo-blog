@@ -13,7 +13,7 @@ hasCJKLanguage = true
 home = ["HTML", "RSS", "Algolia"]
 
 [params]
-  header_image = "img/home-bg-jeep.jpg"
+  header_image = "img/home-bg.jpg"
   SEOTitle = "大俊的博客 | Darjun Blog"
   description = "李大俊，程序员, 游戏开发者，热爱游戏，热爱编程。"
   keyword = "李大俊, lidajun, leedarjun, , 李大俊的网络日志, 李大俊的博客, Darjun Blog, 博客, 个人网站, 互联网, Golang, JavaScript, Java, C++"
@@ -45,8 +45,8 @@ home = ["HTML", "RSS", "Algolia"]
   ba_track_id = "22b47f8b144298dc77b2beb696c6353d"
   
   # We need a proxy to access Disqus api in China
-  disqus_proxy = "https://disqusapi.leedarjun.com"
-  disqus_site = "https://darjun.github.io"
+  # disqus_proxy = "https://disqusapi.leedarjun.com"
+  # disqus_site = "https://darjun.github.io"
 
   #Enable wechat pay & alipay to allow readers send reward money if they like the articles 
   reward = true 
