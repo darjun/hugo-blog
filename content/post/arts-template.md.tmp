@@ -11,13 +11,13 @@ URL: "/2019/03/26/art/week3"
 categories: [ Tech ]
 ---
 
-## 一、概述
+## 1 概述
 
 ARTS 是耗子叔发起的编程挑战：
 
 > 每周完成一个ARTS： 每周至少做一个 leetcode 的算法题、阅读并点评至少一篇英文技术文章、学习至少一个技术技巧、分享一篇有观点和思考的技术文章。（也就是 Algorithm、Review、Tip、Share 简称ARTS）
 
-## 二、Algorithm
+## 2 Algorithm
 
 **问题描述：**
 > Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
@@ -39,8 +39,8 @@ Note that an empty string is also considered valid.
 
 **实现：**
 
-## 三、Review
+## 3 Review
 
-## 四、Tip
+## 4 Tip
 
-## 五、Share
+## 5 Share
