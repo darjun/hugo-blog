@@ -6,7 +6,7 @@ date:		2019-08-21T22:24:00
 author:		"darjun"
 image:	"img/post-bg-2015.jpg"
 tags:
-    - tools
+    - 深入理解Go
 URL: "2019/08/21/golang-generate/"
 categories: [ Tech ]
 ---
