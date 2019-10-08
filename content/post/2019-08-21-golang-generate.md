@@ -193,7 +193,8 @@ var _ErrCode_index = [...]uint8{0, 2, 14, 20}
 
 注意点：
 
-1. `go:generate`前面只能使用`//`注释，且`//`与`go:generate`之间不能有空格！！！
+1. `go:generate`前面只能使用`//`注释，注释必须在行首，前面不能有空格且`//`与`go:generate`之间不能有空格！！！
+2. `go:generate`可以在任何 Go 源文件中，最好在类型定义的地方。
 
 ### 自动化
 
@@ -214,3 +215,5 @@ all:
 
 1. [go blog - generate](https://blog.golang.org/generate)
 2. [go generate文档](https://docs.google.com/document/d/1V03LUfjSADDooDMhe-_K59EgpTEm3V8uvQRuNMAEnjg/edit#heading=h.j6dsjy94dn2q)
+
+[个人主页](https://darjun.github.io)
