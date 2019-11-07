@@ -6,9 +6,11 @@ date:		2019-10-11T12:21:00
 author:		"darjun"
 image:	"img/post-bg-2015.jpg"
 tags:
-    - source
+    - ent
 URL: "2019/10/11/ent-quick-introduction/"
-categories: [ Tech ]
+categories: [ 
+	"Go"
+]
 ---
 
 ## 概述

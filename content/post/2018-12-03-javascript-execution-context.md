@@ -6,9 +6,11 @@ date:       2018-12-03 22:10:08
 author:     "darjun"
 image: "/img/post-bg-2015.jpg"
 tags:
-    - javascript
+    - 深入理解JavaScript
 URL: "/2018/12/03/javascript-execution-context/"
-categories: [ Tech ]
+categories: [
+    "JavaScript"
+]
 ---
 
 ## <span id="概述">1.概述</span>

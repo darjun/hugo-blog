@@ -7,9 +7,11 @@ date:		2018-03-07T11:18:00
 author:		"darjun"
 image:	"/img/post-bg-2015.jpg"
 tags:
-    - tools
+    - 环境搭建
 URL: "/2018/03/08/install-jekyll-on-windows/"
-categories: [ Tech ]
+categories: [ 
+    "Tools"
+]
 ---
 
 ## 背景
@@ -21,12 +23,15 @@ categories: [ Tech ]
 在Windows上使用RubyInstaller安装比较方便，去[Ruby官网][1]下载最新版本的RubyInstaller。注意32位和64位版本的区分。
 
 注意：勾选添加到PATH选项，以便在命令行中使用。
+
 ![添加PATH](/img/in-post/windows-jekyll/ruby-install.png)
 
 安装完成界面：
+
 ![Ruby安装完成](/img/in-post/windows-jekyll/msys2-install.png)
 
 这里需要勾选安装msys2，后面安装gem和jekyll时会用到：
+
 ![安装msys2和development toolchain](/img/in-post/windows-jekyll/ruby-installer2.png)
 
 ### 2. 安装RubyGems

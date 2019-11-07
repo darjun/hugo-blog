@@ -6,9 +6,11 @@ date:       2018-12-20T12:10:08
 author:     "darjun"
 image: "img/post-bg-2015.jpg"
 tags:
-    - javascript
+    - 深入理解JavaScript
 URL: "/2018/12/20/javascript-module/"
-categories: [ Tech ]
+categories: [ 
+    "JavaScript"
+]
 ---
 
 ## <span id="模块">什么是模块</span>

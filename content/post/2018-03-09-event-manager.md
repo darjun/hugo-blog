@@ -6,9 +6,11 @@ date:       2018-03-09T10:58:00
 author:     "darjun"
 image: "/img/post-bg-2015.jpg"
 tags:
-    - game-dev
+    - 开源项目
 URL: "/2018/03/09/event-manager/"
-categories: [ Tech ]
+categories: [
+    "Cpp"
+]
 ---
 
 ## 背景

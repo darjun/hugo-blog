@@ -6,9 +6,12 @@ date:       2019-01-28T22:05:08
 author:     "darjun"
 image: "/img/background2.jpg"
 tags:
-    - go
+    - 环境搭建
 URL: "/2019/01/24/golang-dev-env/"
-categories: [ Tech ]
+categories: [ 
+    "Go",
+    "Tools"
+]
 ---
 
 ## 概述
@@ -99,6 +102,3 @@ goplay
 5. 等等等等。
 
 Enjoy!
-
-关于我：
-[个人主页](https://darjun.github.io) [简书](https://www.jianshu.com/u/0aca4aa367c8) [掘金](https://juejin.im/user/5be15200e51d4505466ce2f4)

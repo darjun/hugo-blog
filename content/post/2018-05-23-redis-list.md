@@ -6,9 +6,11 @@ date:		2018-05-22T22:05:00
 author:		"darjun"
 image:	"/img/post-bg-2015.jpg"
 tags:
-    - redis-source
+    - Redis源码阅读
 URL: "/2018/05/23/redis-list/"
-categories: [ Tech ]
+categories: [ 
+    "Redis"
+]
 ---
 
 ## <span id="概述">1.概述</span>

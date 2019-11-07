@@ -6,9 +6,11 @@ date:       2018-11-08T23:44:00
 author:     "darjun"
 image: "/img/post-bg-2015.jpg"
 tags:
-    - javascript
+    - 深入理解JavaScript
 URL: "/2018/11/07/javascript-promise-intro/"
-categories: [ Tech ]
+categories: [
+    "JavaScript"
+]
 ---
 
 ## <span id="概述">1.概述</span>

@@ -6,9 +6,11 @@ date:       2018-05-24T09:07:00
 author:     "darjun"
 image: "/img/background1.jpg"
 tags:
-    - redis-source
+    - Redis源码阅读
 URL: "/2018/05/24/redis-skiplist/"
-categories: [ Tech ]
+categories: [ 
+    "Redis"
+]
 ---
 
 ## <span id="概述">概述</span>

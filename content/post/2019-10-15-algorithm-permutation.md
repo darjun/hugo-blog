@@ -6,9 +6,11 @@ date:		2019-10-15T12:30:00
 author:		"darjun"
 image:	"img/post-bg-2015.jpg"
 tags:
-    - source
+    - 算法
 URL: "2019/10/15/algorithm/permutation"
-categories: [ Tech ]
+categories: [
+	"Algorithms"
+]
 ---
 
 ## 概述

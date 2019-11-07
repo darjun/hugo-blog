@@ -8,7 +8,9 @@ image:	"img/post-bg-2015.jpg"
 tags:
     - 深入理解Go
 URL: "2019/08/21/golang-generate/"
-categories: [ Tech ]
+categories: [ 
+    "Go"
+]
 ---
 
 ## 概述

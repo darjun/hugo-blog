@@ -6,9 +6,11 @@ date:		2019-10-08T12:30:00
 author:		"darjun"
 image:	"img/post-bg-2015.jpg"
 tags:
-    - source
+    - 开源项目
 URL: "2019/10/08/golang-json-gen/"
-categories: [ Tech ]
+categories: [ 
+	"Go"
+]
 ---
 
 ## 概述

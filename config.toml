@@ -1,111 +1,160 @@
-baseurl = "https://darjun.github.io"
-title = "Darjun Blog"
-theme = "hugo-theme-cleanwhite"
-languageCode = "en-us"
-# Enable comments by entering your Disqus shortname
-disqusShortname = "darjun-blog"
-googleAnalytics = "UA-136116022-1"
-preserveTaxonomyNames = true
-paginate = 5 #frontpage pagination
-hasCJKLanguage = true
+baseURL = "https://darjun.github.io"
+title = "大俊的博客"
+enableRobotsTXT = true
+enableEmoji = true
+theme = "jane"
 
-[outputs]
-home = ["HTML", "RSS", "Algolia"]
+hasCJKLanguage = true     # has chinese/japanese/korean ? # 自动检测是否包含 中文\日文\韩文
+paginate = 10                                              # 首页每页显示的文章数
+rssLimit = 20             # Limit Entry Count to Rss file # 限制 Rss 文章输出数量
+disqusShortname = "https-maiyang-me"      # disqus_shortname
+googleAnalytics = "UA-42862533-1"      # UA-XXXXXXXX-X
+copyright = "大俊"            # default: author.name ↓        # 默认为下面配置的author.name ↓
+# uglyURLs = true         # more info: https://gohugo.io/content-management/urls/#ugly-urls
+
+# Highlight options. See https://gohugo.io/content-management/syntax-highlighting/
+PygmentsCodeFences = true # Enable syntax highlighting with GitHub flavoured code fences
+PygmentsUseClasses = true # Use CSS classes to format highlighted code
+PygmentsCodefencesGuessSyntax = true
+PygmentsOptions = "linenos=table"
+
+# language support # en / zh-cn / other... translations present in i18n/
+defaultContentLanguage = "zh-cn"           # Default language to use
+[languages.zh-cn]
+  languageCode = "zh-cn"
+
+[author]                  # essential                     # 必需
+  name = "大俊"
+
+[sitemap]                 # essential                     # 必需
+  changefreq = "weekly"
+  priority = 0.5
+  filename = "sitemap.xml"
+
+[[menu.main]]             # config your menu              # 配置目录
+  name = "首页"
+  weight = 10
+  identifier = "home"
+  url = "/"
+[[menu.main]]
+  name = "归档"
+  weight = 20
+  identifier = "archives"
+  url = "/post/"
+[[menu.main]]
+  name = "标签"
+  weight = 30
+  identifier = "tags"
+  url = "/tags/"
+[[menu.main]]
+  name = "分类"
+  weight = 40
+  identifier = "categories"
+  url = "/categories/"
+[[menu.main]]
+  name = "Github"
+  weight = 70
+  url = "https://github.com/darjun"
 
 [params]
-  header_image = "img/home-bg.jpg"
-  SEOTitle = "大俊的博客 | Darjun Blog"
-  description = "李大俊，程序员, 游戏开发者，热爱游戏，热爱编程。"
-  keyword = "李大俊, lidajun, leedarjun, , 李大俊的网络日志, 李大俊的博客, Darjun Blog, 博客, 个人网站, 互联网, Golang, JavaScript, Java, C++"
-  slogan = "不积跬步 无以至千里"
+  debug = false             # If true, load `eruda.min.js`. See https://github.com/liriliri/eruda
+  # uglyURLs = true          # You must set true after use uglyURLs in site (above). because $.Site.UglyURLs can not import.
+  since = "2018"            # Site creation time          # 站点建立时间
+  homeFullContent = false   # if false, show post summaries on home page. Othewise show full content.
+  rssFullContent = true     # if false, Rss feed instead of the summary
 
-  image_404 = "img/404-bg.jpg"
-  title_404 = "你来到了没有知识的荒原 :("
+  # site info (optional)                                  # 站点信息（可选，不需要的可以直接注释掉）
+  logoTitle = "大俊"        # default: the title value    # 默认值: 上面设置的title值
+  keywords = ["大俊", "大俊的博客", "go", "golang", "gopher"]
+  description = "Gopher，这里的内容主要是个人技术学习总结，其他个人杂想。"
 
-  # leancloud storage for page view counter
-  page_view_conter = true 
-  leancloud_app_id = "TXNGsfsFQyzdASwAnCBlyIkr-gzGzoHsz"
-  leancloud_app_key = "5N0H4PYj0GcbhLqSMLfPMf8t"
+  # paginate of archives, tags and categories             # 归档、标签、分类每页显示的文章数目，建议修改为一个较大的值
+  archive-paginate = 50
 
-  # algolia site search
-  algolia_search = true
-  algolia_appId = "0BP9H8JW2T"
-  algolia_indexName = "darjun.github.io"
-  algolia_apiKey = "7798d3ae0c79593babd8cd31b9e2f9ad"
+  # paginate style, default use numbered pagination links
+  # if true, use original "Previous" and "Next" links.
+  # paginateOriginalStyle = true
 
-  # Sidebar settings
-  sidebar_about_description = "Game Developer"
-  #sidebar_avatar = "img/avatar-darjun.jpg"      # use absolute URL, seeing it's used in both `/` and `/about/`
-  sidebar_avatar = "img/darjun.jpg"      # use absolute URL, seeing it's used in both `/` and `/about/`
+  # The date format to use; for a list of valid formats, see https://gohugo.io/functions/format/
+  dateFormatToUse = "2006-01-02"
 
-  featured_tags = true 
-  featured_condition_size = 2 
+  # show word count and read time ?                       # 是否显示字数统计与阅读时间
+  moreMeta = true
 
-  # Baidu Analytics
-  ba_track_id = "22b47f8b144298dc77b2beb696c6353d"
-  
-  # We need a proxy to access Disqus api in China
-  # disqus_proxy = "https://disqusapi.leedarjun.com"
-  # disqus_site = "https://darjun.github.io"
+  # 一些全局开关，你也可以在每一篇内容的 front matter 中针对单篇内容关闭或开启某些功能，在 archetypes/default.md 查看更多信息。
+  # Some global options, you can also close or open something in front matter for a single post, see more information from `archetypes/default.md`.
+  toc = true                                                                            # 是否开启目录
+  photoswipe = true         # see https://github.com/dimsemenov/PhotoSwipe            # 是否启用PhotoSwipe（图片可点击）
+  bootcdn = false           # In china. @Deprecated: use [params.publicCDN]             # 是否使用bootcdn(@Deprecated: 请使用[params.publicCDN])
+  mathjax = false           # see https://www.mathjax.org/                              # 是否使用mathjax（数学公式）
+  contentCopyright = '<a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a>'
 
-  #Enable wechat pay & alipay to allow readers send reward money if they like the articles 
-  reward = true 
-  # reward_guide = "如果这篇文章对你有用,请随意打赏" 
+  changyanAppid = ""        # Changyan app id             # 畅言
+  changyanAppkey = ""       # Changyan app key
+  tencent_analytics = ""    # Tencent Analytics
+  baidu_push = false        # baidu push                  # 百度
+  baidu_analytics = ""      # Baidu Analytics
+  baidu_verification = ""   # Baidu Verification
+  google_verification = ""  # Google_Verification         # 谷歌
 
-  friends = true
-  bookmarks = true
-  about_me = true
+  # Link custom CSS and JS assets
+  #   (relative to /static/css and /static/js respectively)
+  customCSS = []            # if ['custom.css'], load '/static/css/custom.css' file
+  customJS = []             # if ['custom.js'], load '/static/js/custom.js' file
 
-  [params.social]
-  rss            = true 
-  email          = "leedarjun@gmail.com"
-  #facebook      = "full profile url in facebook"
-  #googleplus    = "full profile url in googleplus"
-  #twitter       = "full profile url in twitter"
-  #linkedin       = "https://www.linkedin.com/in/zhaohuabing"
-  #stackoverflow  = "https://stackoverflow.com/users/2306565/huabing-zhao"
-  #instagram     = "full profile url in instagram"
-  github         = "https://github.com/darjun"
-  wechat         = "https://darjun.github.io/img/wechat_qrcode.jpg"
-  medium         = "https://medium.com/@leedarjun"
-  #pinterest     = "full profile url in pinterest"
-  
-  #[[params.friend_link]]
-  #title = "Linda的博客"
-  #href =  "https://zhaozhihan.com"
+  # enable 'fork me on github', see https://blog.github.com/2008-12-19-github-ribbons/
+  # forkMeOnGithub = "https://github.com/yangwenmai/maiyang.me"
 
-  #[[params.bookmark_link]]
-  #title =  "Martin Fowler"
-  #href =  "https://martinfowler.com"
-  #[[params.bookmark_link]]
-  #title = "ServiceMesher"
-  #href =  "http://www.servicemesher.com"
-  #[[params.bookmark_link]]
-  #title = "Awesome Service Mesh"
-  #href = "https://servicemesh.gitbooks.io/awesome-servicemesh"
-  #[[params.bookmark_link]]
-  #title =  "Image Compression"
-  #href = "https://tinypng.com"
-  #[[params.bookmark_link]]
-  #title =  "Pxhere"
-  #href = "https://pxhere.com"
-  #[[params.bookmark_link]]
-  #title = "unsplash"
-  #href = "https://unsplash.com"
-  
-  [[params.addtional_menus]]
-  title =  "BOOKS"
-  href =  "/top/books/"
-  [[params.addtional_menus]]
-  title =  "ABOUT"
-  href =  "/top/about/"
+  [params.publicCDN]        # load these files from public cdn                          # 启用公共CDN，需自行定义
+    enable = false
+    jquery = '<script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>'
+    slideout = '<script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>'
+    gitmentJS = '<script src="https://cdn.jsdelivr.net/npm/gitment@0.0.3/dist/gitment.browser.min.js" crossorigin="anonymous"></script>'
+    gitmentCSS = '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitment@0.0.3/style/default.min.css" crossorigin="anonymous">'
 
-[outputFormats.Algolia]
-baseName = "algolia"
-isPlainText = true
-mediaType = "application/json"
-notAlternative = true
+  [params.utteranc]         # utteranc is a comment system based on GitHub issues. see https://utteranc.es
+    enable = false
+    repo = "xianmin/comments-for-hugo-theme-jane"    # The repo to store comments
+    issueTerm = "pathname"
 
-[params.algolia]
-vars = ["title", "summary", "date", "publishdate", "expirydate", "permalink"]
-params = ["categories", "tags"] 
+  [params.gitment]          # Gitment is a comment system based on GitHub issues. see https://github.com/imsun/gitment
+    owner = ""              # Your GitHub ID
+    repo = ""               # The repo to store comments
+    clientId = ""           # Your client ID
+    clientSecret = ""       # Your client secret
+
+  [params.reward]                                         # 文章打赏
+    enable = false
+    wechat = "/path/to/your/wechat-qr-code.png"           # 微信二维码
+    alipay = "/path/to/your/alipay-qr-code.png"           # 支付宝二维码
+
+  [params.social]                                         # 社交链接
+    a-email = "mailto:leedarjun@gmail.com"
+    # e-linkedin = "https://www.linkedin.com/in/mai-yang-2a082777/"
+    g-github = "https://github.com/darjun"
+    # h-weibo = "https://www.weibo.com/yangwen0o0"
+  [params.counter.busuanzi]
+    enable = true
+    
+# jsonfeed support
+# more information: https://github.com/xianmin/hugo-theme-jane/issues/23
+# to have json output it's necessary to uncomment this block of code and create a index.jsonfeed.json template, using hugo template specs
+# [outputs]
+#   home = ["html", "jsonfeed","rss"]
+#   page = ["html"]
+#
+# [outputFormats]
+# [outputFormats.jsonfeed]
+#   mediaType = "application/json"
+#   baseName = "feed"
+#   isPlainText = true
+
+
+# multilingual support example
+# [langusges]
+# [languages.en]
+#   title = "Jane - A simple theme for Hugo"
+#   weight = 1
+# [languages.zh-cn]
+#   title = "Jane —— 一个简洁的 Hugo 主题"
+#   weight = 2

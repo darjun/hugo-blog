@@ -1,14 +1,16 @@
 ---
 layout:     post
-title:      "Golang中的BCE优化"
+title:      "深入理解Go之BCE优化"
 subtitle:   "\"More Effecient Go\""
 date:       2018-05-07T11:00:00 
 author:     "darjun"
 image: "/img/post-bg-2015.jpg"
 tags:
-    - golang
+    - 深入理解Go
 URL: "/2018/05/07/bounds-check-elimination/"
-categories: [ Tech ]
+categories: [
+    "Go"
+]
 ---
 
 ## 概述
