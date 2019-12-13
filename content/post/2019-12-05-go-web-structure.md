@@ -17,7 +17,7 @@ categories: [
 
 一个典型的 Go Web 程序结构如下，摘自《Go Web 编程》：
 
-![](/img/in-post/goweb/structure1.png)
+![](/img/in-post/goweb/structure1.png#center)
 
 * 客户端发送请求；
 * 服务器中的多路复用器收到请求；
@@ -299,33 +299,78 @@ func main() {
 
 * 浏览器请求`localhost:8080/`将返回`"This is the index page"`，因为`/`精确匹配；
 
-![](/img/in-post/goweb/structure2.png#center)
+![](img/in-post/goweb/structure2.png#center)
 
 * 浏览器请求`localhost:8080/hello`将返回`"This is the hello page"`，因为`/hello`精确匹配；
 
-![](/img/in-post/goweb/structure3.png#center)
+![](img/in-post/goweb/structure3.png#center)
 
 * 浏览器请求`localhost:8080/hello/`将返回`"This is the index page"`。**注意这里不是`hello`，因为绑定的`/hello`需要精确匹配，而请求的`/hello/`不能与之精确匹配。故而向上查找到`/`**；
 
-![](/img/in-post/goweb/structure4.png#center)
+![](img/in-post/goweb/structure4.png#center)
 
 * 浏览器请求`localhost:8080/hello/world`将返回`"This is the world page"`，因为`/hello/world`精确匹配；
 
-![](/img/in-post/goweb/structure5.png#center)
+![](img/in-post/goweb/structure5.png#center)
 
 * 浏览器请求`localhost:8080/hello/world/`将返回`"This is the index page"`，**查找步骤为`/hello/world/`（不能与`/hello/world`精确匹配）-> `/hello/`（不能与`/hello/`精确匹配）-> `/`**；
 
-![](/img/in-post/goweb/structure7.png#center)
+![](img/in-post/goweb/structure7.png#center)
 
 * 浏览器请求`localhost:8080/hello/other`将返回`"This is the index page"`，**查找步骤为`/hello/others` -> `/hello/`（不能与`/hello`精确匹配）-> `/`**；
 
-![](/img/in-post/goweb/structure6.png#center)
+![](img/in-post/goweb/structure6.png#center)
 
 
 如果注册时，将`/hello`改为`/hello/`，那么请求`localhost:8080/hello/`和`localhost:8080/hello/world/`都将返回`"This is the hello page"`。自己试试吧！
 
 思考：
 使用`/hello/`注册处理器时，`localhost:8080/hello/`返回什么？
+
+## 总结
+
+本文介绍了 Go Web 程序的基本结构。Go Web 的基本形式如下：
+
+```golang
+package main
+
+import (
+    "fmt"
+    "log"
+    "net/http"
+)
+
+func helloHandler(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintf(w, "Hello, World")
+}
+
+type greetingHandler struct {
+    Name string
+}
+
+func (h greetingHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintf(w, "Hello, %s", h.Name)
+}
+
+func main() {
+    mux := http.NewServeMux()
+    // 注册处理器函数
+    mux.HandleFunc("/hello", helloHandler)
+    
+    // 注册处理器
+    mux.Handle("/greeting/golang", greetingHandler{Name: "Golang"})
+    
+    server := &http.Server {
+        Addr:       ":8080",
+        Handler:    mux,
+    }
+    if err := server.ListenAndServe(); err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
+后续文章中大部分程序只是在此基础上增加处理器或处理器函数并注册到相应的 URL 中而已。处理器和处理器函数可以只使用一种或两者都使用。注意，为了方便，命名中我都加上了`Handler`。
 
 ## 参考资料
 
