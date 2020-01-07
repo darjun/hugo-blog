@@ -299,27 +299,27 @@ func main() {
 
 * 浏览器请求`localhost:8080/`将返回`"This is the index page"`，因为`/`精确匹配；
 
-![](img/in-post/goweb/structure2.png#center)
+![](/img/in-post/goweb/structure2.png#center)
 
 * 浏览器请求`localhost:8080/hello`将返回`"This is the hello page"`，因为`/hello`精确匹配；
 
-![](img/in-post/goweb/structure3.png#center)
+![](/img/in-post/goweb/structure3.png#center)
 
 * 浏览器请求`localhost:8080/hello/`将返回`"This is the index page"`。**注意这里不是`hello`，因为绑定的`/hello`需要精确匹配，而请求的`/hello/`不能与之精确匹配。故而向上查找到`/`**；
 
-![](img/in-post/goweb/structure4.png#center)
+![](/img/in-post/goweb/structure4.png#center)
 
 * 浏览器请求`localhost:8080/hello/world`将返回`"This is the world page"`，因为`/hello/world`精确匹配；
 
-![](img/in-post/goweb/structure5.png#center)
+![](/img/in-post/goweb/structure5.png#center)
 
 * 浏览器请求`localhost:8080/hello/world/`将返回`"This is the index page"`，**查找步骤为`/hello/world/`（不能与`/hello/world`精确匹配）-> `/hello/`（不能与`/hello/`精确匹配）-> `/`**；
 
-![](img/in-post/goweb/structure7.png#center)
+![](/img/in-post/goweb/structure7.png#center)
 
 * 浏览器请求`localhost:8080/hello/other`将返回`"This is the index page"`，**查找步骤为`/hello/others` -> `/hello/`（不能与`/hello`精确匹配）-> `/`**；
 
-![](img/in-post/goweb/structure6.png#center)
+![](/img/in-post/goweb/structure6.png#center)
 
 
 如果注册时，将`/hello`改为`/hello/`，那么请求`localhost:8080/hello/`和`localhost:8080/hello/world/`都将返回`"This is the hello page"`。自己试试吧！
