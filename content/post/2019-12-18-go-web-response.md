@@ -39,7 +39,7 @@ type ReponseWriter interface {
 
 我们响应客户端请求都是通过该接口的 3 个方法进行的。例如之前`fmt.Fprintln(w, "Hello World")`其实底层调用了`Write`方法。
 
-收到请求后，多路复用器会自动创建一个`http.response`对象，它实现了`http.ResponseWriter`接口，然后将该对象和请求对象作为参数传给处理器。那为什么请求对象使用的时结构指针`*http.Request`，而响应要使用接口呢？
+收到请求后，多路复用器会自动创建一个`http.response`对象，它实现了`http.ResponseWriter`接口，然后将该对象和请求对象作为参数传给处理器。那为什么请求对象使用的是结构指针`*http.Request`，而响应要使用接口呢？
 
 实际上，请求对象使用指针是为了能在处理逻辑中方便地获取请求信息。而响应使用接口来操作，一方面底层也是对象指针，可以保存修改。另一方面，我认为是为了扩展性。可以很方便地用新的实现替换而不用修改应用层代码，即处理器接口不用修改。例如，Go 标准库提供了一个测试 HTTP 请求的工具包`net/http/httptest`。它定义了一个`ResponseRecorder`结构，该结构实现了接口`http.ResponseWriter`。这个结构不将写入的数据发送给客户端，**而是将数据记录下来，方便测试断言**。
 
@@ -456,3 +456,16 @@ func main() {
 ## 总结
 
 本文介绍了如何响应客户端的请求和 cookie 的相关知识。相关代码在[Github](https://github.com/darjun/go-web-example/tree/master/4-response)上，非常建议大家自己编写运行一遍以便加深印象。
+
+## 参考
+
+1. [Go Web 编程](https://book.douban.com/subject/27204133/)
+2. [net/http](https://golang.org/pkg/net/http/)标准库文档
+
+## 我
+
+[我的博客](https://darjun.github.io)
+
+欢迎关注我的微信公众号【GoUpUp】，共同学习，一起进步~
+
+![](/img/wxgzh8.jpg#center)

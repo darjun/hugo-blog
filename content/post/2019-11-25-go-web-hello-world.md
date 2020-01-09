@@ -115,20 +115,17 @@ StatusCode Description
 package main
 
 import (
-	"fmt"
-	"log"
-	"net/http"
+  "fmt"
+  "net/http"
 )
 
 func hello(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello World")
+  fmt.Fprintf(w, "Hello, World!")
 }
 
 func main() {
-	http.HandleFunc("/", hello)
-	if err := http.ListenAndServe(":8080", nil); err != nil {
-		log.Fatal(err)
-	}
+    http.HandleFunc("/", hello)
+    http.ListenAndServe(":8080", nil)
 }
 ```
 
@@ -156,7 +153,15 @@ func main() {
 
 接下来，我们来深入学习 HTTP 请求的内容。
 
-## 参考资料
+## 参考
 
 1. [Go Web 编程](https://book.douban.com/subject/27204133/)
 2. [HTTP 响应码](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
+
+## 我
+
+[我的博客](https://darjun.github.io)
+
+欢迎关注我的微信公众号【GoUpUp】，共同学习，一起进步~
+
+![](/img/wxgzh8.jpg#center)

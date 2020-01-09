@@ -995,7 +995,15 @@ This is default content.
 
 本文介绍了 Go 提供的模板`text/template`。模板比较简单易用，对于一些细节需要多加留意。代码在[Github](https://github.com/darjun/go-web-example/tree/master/5-template)上。
 
-## 参考链接
+## 参考
 
 1. [Go Web 编程](https://book.douban.com/subject/27204133/)
 2. [text/template](https://golang.org/pkg/text/template/)文档
+
+## 我
+
+[我的博客](https://darjun.github.io)
+
+欢迎关注我的微信公众号【GoUpUp】，共同学习，一起进步~
+
+![](/img/wxgzh8.jpg#center)

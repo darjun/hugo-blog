@@ -491,3 +491,16 @@ fmt.Fprintln(w, r.FormValue("hello"))
 ## 总结
 
 本文介绍了`net/http`包中请求的各方面内容。从`Request`结构到如何传递参数，最后介绍各种编码的请求如何处理。
+
+## 参考
+
+1. [Go Web 编程](https://book.douban.com/subject/27204133/)
+2. [net/http](https://golang.org/pkg/net/http/)标准库文档
+
+## 我
+
+[我的博客](https://darjun.github.io)
+
+欢迎关注我的微信公众号【GoUpUp】，共同学习，一起进步~
+
+![](/img/wxgzh8.jpg#center)

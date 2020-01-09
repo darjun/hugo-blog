@@ -68,7 +68,7 @@ var defaultServeMux ServeMux
 这里给大家介绍一下 Go 标准库代码的组织方式，便于大家对照。
 
 * Windows上，Go 语言的默认安装目录为`C:\Go`，即`GOROOT`；
-* `GOROOT`下有一个 src 目录，标库库的代码都在这个目录中；
+* `GOROOT`下有一个 src 目录，标准库的代码都在这个目录中；
 * 每个包有一个单独的目录，例如 fmt 包在`src/fmt`目录中；
 * 子包在其父包的子目录中，例如 net/http 包在`src/net/http`目录中。
 
@@ -375,3 +375,11 @@ func main() {
 ## 参考资料
 
 1. [Go Web 编程](https://book.douban.com/subject/27204133/)
+
+## 我
+
+[我的博客](https://darjun.github.io)
+
+欢迎关注我的微信公众号【GoUpUp】，共同学习，一起进步~
+
+![](/img/wxgzh8.jpg#center)
