@@ -558,6 +558,7 @@ func (f *FlagSet) Parse(arguments []string) error {
 ```
 
 与直接使用`flag`库的方法有一点不同，`FlagSet`调用`Parse`方法时需要显示传入字符串切片作为参数。因为`flag.Parse`在内部调用了`CommandLine.Parse(os.Args[1:])`。
+示例代码都放在[GitHub](https://github.com/darjun/go-daily-lib)上了。
 
 ## 参考
 
