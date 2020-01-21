@@ -105,7 +105,7 @@ type Event struct {
 }
 ```
 
-事件只有两个字段，`Name`表示发生变化的文件或目录名，`Op`表示具体的变化。`Op`有 5 中取值：
+事件只有两个字段，`Name`表示发生变化的文件或目录名，`Op`表示具体的变化。`Op`有 5 种取值：
 
 ```golang
 // fsnotify/fsnotify.go
