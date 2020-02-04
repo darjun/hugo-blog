@@ -524,6 +524,8 @@ func main() {
 
 完整示例代码在[GitHub](https://github.com/darjun/go-daily-lib/tree/master/cast)上。
 
+ps: 本以为春节就这么几天，偷个懒，没想到。。。
+
 ## 参考
 
 1. [cast](https://github.com/spf13/cast) GitHub 仓库
