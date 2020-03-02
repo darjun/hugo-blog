@@ -365,7 +365,7 @@ func InitEndingA(name string) EndingA {
 
 ### 绑定值
 
-有时候，我们需要为某个类型绑定一个值，而不想依赖构造器每次都创建一个新的值。有些类型天生就是单例，例如配置，数据库对象（`sql.DB`）。这时我们可以使用`wire.Value`绑定值，使用`wire.InterfaceValue`绑定接口。例如，我们的怪兽一直是一个`Kitty`，我们就不用每次都取创建它了，直接绑定这个值就 ok 了：
+有时候，我们需要为某个类型绑定一个值，而不想依赖构造器每次都创建一个新的值。有些类型天生就是单例，例如配置，数据库对象（`sql.DB`）。这时我们可以使用`wire.Value`绑定值，使用`wire.InterfaceValue`绑定接口。例如，我们的怪兽一直是一个`Kitty`，我们就不用每次都去创建它了，直接绑定这个值就 ok 了：
 
 ```golang
 var kitty = Monster{Name: "kitty"}
