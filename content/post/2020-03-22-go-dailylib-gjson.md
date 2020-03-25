@@ -248,7 +248,7 @@ Jack
 
 ### 修饰符参数
 
-修饰符还可以有参数，通过在修饰符后加`:`后跟参数。如果我们在格式化 JSON 串时，想要对键进行排序，那么可以使用`@pretty`修饰符的`sortKeys`参数。我们还是那上面的 JSON 数据举例：
+修饰符还可以有参数，通过在修饰符后加`:`后跟参数。如果我们在格式化 JSON 串时，想要对键进行排序，那么可以使用`@pretty`修饰符的`sortKeys`参数。我们还是拿上面的 JSON 数据举例：
 
 ```golang
 fmt.Println(gjson.Get(json, `friends|@pretty:{"sortKeys":true}`))
