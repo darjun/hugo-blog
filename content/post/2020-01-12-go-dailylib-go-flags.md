@@ -172,7 +172,7 @@ func main() {
     fmt.Println("in callback: ", value)
   }
   
-  err := flags.Parse(&opt, os.Args[1:])
+  _, err := flags.Parse(&opt)
   if err != nil {
     fmt.Println("Parse error:", err)
     return

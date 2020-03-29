@@ -7,7 +7,7 @@ author:		"darjun"
 image:	"img/post-bg-2015.jpg"
 tags:
     - Go 每日一库
-URL: "2020/03/25/godailylib/sjson"
+URL: "2020/03/24/godailylib/sjson"
 categories: [
 	"Go"
 ]
@@ -105,17 +105,19 @@ func main() {
 
 ```golang
 func main() {
-
   fruits := `{"fruits":["apple", "orange", "banana"]}`
 
   var newValue string
-  newValue, _ = sjson.Delete(fruits, "fruits.1")
+  newValue, _ = sjson.Set(fruits, "fruits.1", "grape")
   fmt.Println(newValue)
 
-  newValue, _ = sjson.Delete(fruits, "fruits.-1")
+  newValue, _ = sjson.Set(fruits, "fruits.3", "pear")
   fmt.Println(newValue)
 
-  newValue, _ = sjson.Set(fruits, "fruits.5")
+  newValue, _ = sjson.Set(fruits, "fruits.-1", "strawberry")
+  fmt.Println(newValue)
+
+  newValue, _ = sjson.Set(fruits, "fruits.5", "watermelon")
   fmt.Println(newValue)
 }
 ```
