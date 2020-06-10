@@ -15,7 +15,7 @@ categories: [
 
 ## 简介
 
-[twirp](https://github.com/twitchtv/twirp)是一个基于 Google Protobuf 的 RPC 框架。`twirp`通过在`.proto`文件中定义服务，然后自动生产服务器和客户端的代码。让我们可以将更多的精力放在业务逻辑上。咦？这不就是 gRPC 吗？gRPC 自己实现了一套 HTTP 服务器和网络传输层，twirp 使用标准库`net/http`。另外 gRPC 只支持 HTTP/2 协议，twirp 还可以运行在 HTTP 1.1 之上。同时 twirp 还可以使用 JSON 格式交互。当然并不是说 twirp 比 gRPC 好，只是多了解一种框架也就多了一个选择😊
+[twirp](https://github.com/twitchtv/twirp)是一个基于 Google Protobuf 的 RPC 框架。`twirp`通过在`.proto`文件中定义服务，然后自动生产服务器和客户端的代码。让我们可以将更多的精力放在业务逻辑上。咦？这不就是 gRPC 吗？不同的是，gRPC 自己实现了一套 HTTP 服务器和网络传输层，twirp 使用标准库`net/http`。另外 gRPC 只支持 HTTP/2 协议，twirp 还可以运行在 HTTP 1.1 之上。同时 twirp 还可以使用 JSON 格式交互。当然并不是说 twirp 比 gRPC 好，只是多了解一种框架也就多了一个选择😊
 
 ## 快速使用
 
@@ -69,7 +69,7 @@ message Response {
 $ protoc --twirp_out=. --go_out=. ./echo.proto
 ```
 
-上面命令会生成`echo.pb.go`和`echo.twirp.go`两个文件。前一个是 Go Protobuf 文件，后一个文件中包含了`twirp`相关组件。
+上面命令会生成`echo.pb.go`和`echo.twirp.go`两个文件。前一个是 Go Protobuf 文件，后一个文件中包含了`twirp`的服务器和客户端代码。
 
 然后我们就可以编写服务器和客户端程序了。服务器：
 
@@ -97,7 +97,7 @@ func main() {
 }
 ```
 
-使用自动生成的代码，我们只需要 3 步即可完成一个服务器：
+使用自动生成的代码，我们只需要 3 步即可完成一个 RPC 服务器：
 
 1. 定义一个结构，可以存储一些状态。让它实现我们定义的`service`接口；
 2. 创建一个该结构的对象，调用生成的`New{{ServiceName}}Server`方法创建`net/http`需要的处理器，这里的`ServiceName`为我们的服务名；
@@ -128,7 +128,7 @@ func main() {
 }
 ```
 
-`twirp`也生成了客户端相关代码，直接调用`NewEchoProtobufClient`连接对应的服务器上，然后调用`rpc`请求。
+`twirp`也生成了客户端相关代码，直接调用`NewEchoProtobufClient`连接到对应的服务器，然后调用`rpc`请求。
 
 开启两个控制台，分别运行服务器和客户端程序。服务器：
 
@@ -202,7 +202,7 @@ unc (s *echoServer) serveSay(ctx context.Context, resp http.ResponseWriter, req 
 
 ## 提供其他 HTTP 服务
 
-实际上，`twirpHandler`只是一个`http`的处理器，正如其他千千万万的处理器一样，没什么特殊的。我们当然可以挂载我们自己的处理器或处理器函数（概念有不清楚的可以参见我的《Go Web 编程》系列文章，[https://darjun.github.io/tags/go-web-%E7%BC%96%E7%A8%8B/](https://darjun.github.io/tags/go-web-%E7%BC%96%E7%A8%8B/）：
+实际上，`twirpHandler`只是一个`http`的处理器，正如其他千千万万的处理器一样，没什么特殊的。我们当然可以挂载我们自己的处理器或处理器函数（概念有不清楚的可以参见我的[《Go Web 编程》系列文章](https://darjun.github.io/tags/go-web-%E7%BC%96%E7%A8%8B/)：
 
 ```golang
 type Server struct{}
@@ -269,9 +269,9 @@ greeting: hi,dj
 
 ## 发送自定义的 Header
 
-默认情况下，`twirp`实现会发送一些 Header。例如上面介绍的，使用`Content-Type`辨别客户端使用的协议格式。有时候我们可能需要发送一些自定义的 Header，例如`token`。`twirp`提供了`WithHTTPRequestHeaders`方法实现这个功能，该方法返回一个`context.Context`。发送时会将其中保存的 Header 一并发送。同样地，服务器要发送自定义 Header，使用`WithHTTPResponseHeaders`。
+默认情况下，`twirp`实现会发送一些 Header。例如上面介绍的，使用`Content-Type`辨别客户端使用的协议格式。有时候我们可能需要发送一些自定义的 Header，例如`token`。`twirp`提供了`WithHTTPRequestHeaders`方法实现这个功能，该方法返回一个`context.Context`。发送时会将保存在该对象中的 Header 一并发送。类似地，服务器使用`WithHTTPResponseHeaders`发送自定义 Header。
 
-由于`twirp`封装了`net/http`，导致外层拿不到原始的`http.Request`和`http.Response`对象，所以 Header 的读取有点麻烦。在服务器端，由于`NewEchoServer`返回的是一个`http.Handler`，我们加一层中间件读取`http.Request`。看下面代码：
+由于`twirp`封装了`net/http`，导致外层拿不到原始的`http.Request`和`http.Response`对象，所以 Header 的读取有点麻烦。在服务器端，`NewEchoServer`返回的是一个`http.Handler`，我们加一层中间件读取`http.Request`。看下面代码：
 
 ```golang
 type Server struct{}
@@ -349,7 +349,7 @@ $ curl --request "POST" \
 
 ## 总结
 
-本文介绍了 Go 的一个基于 Protobuf 生成代码的 RPC 框架，非常简单，小巧，实用。可以作为 gRPC 等的备选方案考虑。
+本文介绍了 Go 的一个基于 Protobuf 生成代码的 RPC 框架，非常简单，小巧，实用。`twirp`对许多常用的编程语言都提供了支持。可以作为 gRPC 等的备选方案考虑。
 
 大家如果发现好玩、好用的 Go 语言库，欢迎到 Go 每日一库 GitHub 上提交 issue😄
 
