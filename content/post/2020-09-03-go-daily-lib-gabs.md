@@ -69,7 +69,7 @@ func main() {
 
 首先，我们调用`gabs.ParseJSON()`方法解析传入的 JSON 串，得到一个`gabs.Container`对象。后续通过该`gabs.Container`对象来查询和修改解析出来的数据。
 
-`gabs`提供 3 中查询方式：
+`gabs`提供 3 种查询方式：
 
 * 以`.`分隔的路径调用`Path()`方法；
 * 将路径各个部分作为可变参数传入`Search()`方法；
