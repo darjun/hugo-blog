@@ -22,14 +22,14 @@ categories: [
 创建目录并初始化：
 
 ```cmd
-$ mkdir goquery && cd goquery
-$ go mod init github.com/darjun/go-daily-lib/goquery
+$ mkdir dig && cd dig
+$ go mod init github.com/darjun/go-daily-lib/dig
 ```
 
-安装`goquery`库：
+安装`dig`库：
 
 ```cmd
-$ go get -u github.com/PuerkitoBio/goquery
+$ go get -u github.com/PuerkitoBio/dig
 ```
 
 ## 总结
