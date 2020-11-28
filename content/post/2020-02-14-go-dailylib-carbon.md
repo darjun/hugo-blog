@@ -21,7 +21,7 @@ categories: [
 
 第三方库需要先安装：
 
-```
+```cmd
 $ go get github.com/uniplaces/carbon
 ```
 
@@ -321,11 +321,11 @@ import (
 
 func main() {
   t := time.Now()
-  fmt.Println(t.Format("2006-01-02 10:00:00"))
+  fmt.Println(t.Format("2006-01-02 15:04:05"))
 }
 ```
 
-上面我们只需要传入一个`2006-01-02 10:00:00`表示我们想要的格式为`yyyy-mm-dd hh:mm:ss`，省去了我们需要记忆的麻烦。
+上面我们只需要传入一个`2006-01-02 15:04:05`表示我们想要的格式为`yyyy-mm-dd hh:mm:ss`，省去了我们需要记忆的麻烦。
 
 为了使用方便，Go 内置了一些标准的时间格式：
 
