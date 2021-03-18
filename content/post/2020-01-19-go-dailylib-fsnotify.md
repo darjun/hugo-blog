@@ -15,7 +15,7 @@ categories: [
 
 ## 简介
 
-上一篇文章[Go 每日一库之 viper](http://localhost:1313/2020/01/18/godailylib/viper/)中，我们介绍了 viper 可以监听文件修改进而自动重新加载。
+上一篇文章[Go 每日一库之 viper](http://darjun.github.io/2020/01/18/godailylib/viper/)中，我们介绍了 viper 可以监听文件修改进而自动重新加载。
 其内部使用的就是`fsnotify`这个库，它是跨平台的。今天我们就来介绍一下它。
 
 ## 快速使用
