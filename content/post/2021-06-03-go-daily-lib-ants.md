@@ -539,7 +539,7 @@ func main() {
 
 ## 参考
 
-1. ants GitHub：[github.com/valyala/ants](https://github.com/panjf2000/ants)
+1. ants GitHub：[github.com/panjf2000/ants](https://github.com/panjf2000/ants)
 2. Go 每日一库 GitHub：[https://github.com/darjun/go-daily-lib](https://github.com/darjun/go-daily-lib)
 
 ## 我
