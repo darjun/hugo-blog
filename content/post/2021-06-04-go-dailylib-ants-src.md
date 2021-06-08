@@ -552,7 +552,7 @@ func (p *Pool) revertWorker(worker *goWorker) bool {
 
 如果当前`goWorker`数量不为 0，则调用`p.workers.detach()`取出一个空闲的`goWorker`返回。这个操作有可能失败，因为可能同时有多个 goroutine 在等待，唤醒的时候只有部分 goroutine 能获取到`goWorker`。如果失败了，其容量还未用完，直接创建新的`goWorker`，反之重新执行阻塞等待逻辑。
 
-这里有很多加锁和解锁的逻辑，再加上和信号量混在一起很难看明白。其实只需要知道一点就很简单了，那就是`p.cond.Wait()`内部会将当前 goroutine 挂起，然后解开它持有的锁，即会调用`p.lock.Unlock()`。这也是为什么`revertWorker()`中`p.lock.Lock()`加锁能成功的原因。然后`p.cond.Signal()`或`p.cond.Broadcast()`会唤醒因为`p.cond.Wait()`而挂起的 goroutine，但是需要`Signal()/Broadcast()`所在 goroutine 调用解锁方法。
+这里有很多加锁和解锁的逻辑，再加上和信号量混在一起很难看明白。其实只需要知道一点就很简单了，那就是`p.cond.Wait()`内部会将当前 goroutine 挂起，然后解开它持有的锁，即会调用`p.lock.Unlock()`。这也是为什么`revertWorker()`中`p.lock.Lock()`加锁能成功的原因。然后`p.cond.Signal()`或`p.cond.Broadcast()`会唤醒因为`p.cond.Wait()`而挂起的 goroutine，但是需要`Signal()/Broadcast()`所在 goroutine 调用解锁方法。而调用`p.cond.Wait()`的 goroutine 被唤醒之后，内部会重新执行加锁操作（即调用`p.lock.Lock()`），所以`p.cond.Wait()`之后的逻辑还是在有锁的状态下执行的。
 
 最后，放上整体流程图：
 
