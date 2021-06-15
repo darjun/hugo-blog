@@ -1,6 +1,6 @@
 ---
 layout:    post
-title:    "记为 tunny 提交 PR"
+title:    "为 tunny 提交的一次 PR"
 subtitle: "每天进步一点点"
 date:		2021-06-12T11:48:30
 author:		"darjun"
