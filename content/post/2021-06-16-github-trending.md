@@ -21,7 +21,7 @@ categories: [
 
 首先，我们来观察一下 GitHub Trending 的结构：
 
-![](/img/in-post/go-github-trending/1.png#center)
+![](/img/in-post/opensource/trending1.png#center)
 
 左上角可以切换仓库（Repositories）和开发者（Developers）。右边可以选择语言（Spoken Language，本地语言，汉语、英文等）、语言（Language，编程语言，Golang、C++等）和时间范围（Date Range，支持 3 个维度，Today、This week、This month）。
 
@@ -43,7 +43,7 @@ categories: [
 
 开发者页面也是类似的，只不过信息少了很多：
 
-![](/img/in-post/go-github-trending/2.png#center)
+![](/img/in-post/opensource/trending2.png#center)
 
 ① 作者信息
 
@@ -93,15 +93,15 @@ type Developer struct {
 
 要想使用`goquery`获取相应的信息，我们首先要直到，对应的网页结构。按 F12 打开 chrome 开发者工具，选择`Elements`页签，即可看到网页结构：
 
-![](/img/in-post/go-github-trending/3.png#center)
+![](/img/in-post/opensource/trending3.png#center)
 
 使用左上角的按钮就可以很快速的查看网页上任何内容的结构，我们点击单个仓库条目：
 
-![](/img/in-post/go-github-trending/4.png#center)
+![](/img/in-post/opensource/trending4.png#center)
 
 右边`Elements`窗口显示每个仓库条目对应一个`article`元素：
 
-![](/img/in-post/go-github-trending/5.png#center)
+![](/img/in-post/opensource/trending5.png#center)
 
 可以使用标准库`net/http`获取整个网页的内容：
 
@@ -124,11 +124,11 @@ doc.Find(".Box .Box-row").Each(func(i int, s *goquery.Selection) {
 
 接下来我们看看如何提取各个部分。在`Elements`窗口中移动，可以很直观的看到每个元素对应页面的哪个部分：
 
-![](/img/in-post/go-github-trending/6.gif#center)
+![](/img/in-post/opensource/trending6.gif#center)
 
 我们找到仓库名和作者对应的结构：
 
-![](/img/in-post/go-github-trending/7.png#center)
+![](/img/in-post/opensource/trending7.png#center)
 
 它被包在`article`元素下的`h1`元素下的`a`元素内，作者名在`span`元素内，仓库名直接在`a`下，另外仓库的 URL 链接是`a`元素的`href`属性。我们来获取它们：
 
@@ -401,7 +401,7 @@ $ go mod init github/darjun/demo/ghtrending
 
 下载包：
 
-![](/img/in-post/go-github-trending/9.png#center)
+![](/img/in-post/opensource/trending9.png#center)
 
 编写代码：
 
@@ -438,13 +438,13 @@ func main() {
 
 运行效果：
 
-![](/img/in-post/go-github-trending/10.png#center)
+![](/img/in-post/opensource/trending10.png#center)
 
 ### 文档
 
 最后，我们加点文档：
 
-![](/img/in-post/go-github-trending/8.png#center)
+![](/img/in-post/opensource/trending8.png#center)
 
 一个小开源库就完成了。 
 
