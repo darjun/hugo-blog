@@ -91,7 +91,7 @@ type Developer struct {
 
 ## 开爬
 
-要想使用`goquery`获取相应的信息，我们首先要直到，对应的网页结构。按 F12 打开 chrome 开发者工具，选择`Elements`页签，即可看到网页结构：
+要想使用`goquery`获取相应的信息，我们首先要知道，对应的网页结构。按 F12 打开 chrome 开发者工具，选择`Elements`页签，即可看到网页结构：
 
 ![](/img/in-post/opensource/trending3.png#center)
 
