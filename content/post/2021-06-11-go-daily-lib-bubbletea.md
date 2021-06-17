@@ -19,6 +19,8 @@ categories: [
 
 ![](/img/in-post/godailylib/bubbletea0.gif#center)
 
+感谢[kiyonlin](https://github.com/kiyonlin)推荐。
+
 ## 快速使用
 
 本文代码使用 Go Modules。
@@ -528,6 +530,7 @@ if m.totalPage > 1 {
 1. bubbletea GitHub：[https://github.com/charmbracelet/bubbletea](https://https://github.com/charmbracelet/bubbletea)
 2. bubble GitHub：[https://github.com/charmbracelet/bubbles](https://https://github.com/charmbracelet/bubbles)
 3. Go 每日一库 GitHub：[https://github.com/darjun/go-daily-lib](https://github.com/darjun/go-daily-lib)
+4. issue：[https://github.com/darjun/go-daily-lib/issues/22](https://github.com/darjun/go-daily-lib/issues/22)
 
 ## 我
 
