@@ -470,7 +470,7 @@ func ContentTypeHandler(h http.Handler, contentTypes ...string) http.Handler {
 
 就是读取`Content-Type`首部，判断是否在我们指定的类型中。
 
-## 方法处理器
+## 方法分发器
 
 在上面的例子中，我们注册路径`/login`的`GET`和`POST`方法处理采用`r.Methods("GET").Path("/login").HandlerFunc(login)`这种冗长的写法。`handlers.MethodHandler`可以简化这种写法：
 
@@ -644,3 +644,5 @@ GitHub 上有很多开源的 Go Web 中间件实现，可以直接拿来使用�
 我的博客：[https://darjun.github.io](https://darjun.github.io)
 
 欢迎关注我的微信公众号【GoUpUp】，共同学习，一起进步~
+
+![](/img/wxsearch.png#center)
