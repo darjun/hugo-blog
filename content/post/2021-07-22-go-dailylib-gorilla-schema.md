@@ -24,7 +24,7 @@ categories: [
 创建目录并初始化：
 
 ```cmd
-$ mkdir gorilla/schema && cd gorilla/schema
+$ mkdir -p gorilla/schema && cd gorilla/schema
 $ go mod init github.com/darjun/go-daily-lib/gorilla/schema
 ```
 

@@ -28,7 +28,7 @@ categories: [
 创建目录并初始化：
 
 ```cmd
-$ mkdir gorilla/sessions && cd gorilla/sessions
+$ mkdir -p gorilla/sessions && cd gorilla/sessions
 $ go mod init github.com/darjun/go-daily-lib/gorilla/sessions
 ```
 

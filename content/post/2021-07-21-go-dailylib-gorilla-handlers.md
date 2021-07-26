@@ -26,7 +26,7 @@ categories: [
 创建目录并初始化：
 
 ```cmd
-$ mkdir gorilla/handlers && cd gorilla/handlers
+$ mkdir -p gorilla/handlers && cd gorilla/handlers
 $ go mod init github.com/darjun/go-daily-lib/gorilla/handlers
 ```
 

@@ -30,7 +30,7 @@ cookie 有两大缺点：
 创建目录并初始化：
 
 ```cmd
-$ mkdir gorilla/securecookie && cd gorilla/securecookie
+$ mkdir -p gorilla/securecookie && cd gorilla/securecookie
 $ go mod init github.com/darjun/go-daily-lib/gorilla/securecookie
 ```
 
