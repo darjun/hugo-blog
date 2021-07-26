@@ -724,7 +724,6 @@ New observable:
 item: 1
 item: 4
 item: 7
-item: 10
 New observable:
 item: 2
 item: 5
