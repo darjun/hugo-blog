@@ -24,7 +24,7 @@ categories: [
 先安装：
 
 ```golang
-$ go get github.com/com/google/go-cmp/cmp
+$ go get github.com/google/go-cmp/cmp
 ```
 
 后使用：
