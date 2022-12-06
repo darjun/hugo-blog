@@ -1,0 +1,9 @@
+{{ if .IsNamedParams }}
+  <div class="{{ if .Get "class" }}{{ .Get "class" }}{{ else }}vimeo-container{{ end }}">
+    <video src="https://player.vimeo.com/video/{{ .Get "id" }}" allowfullscreen autoplay loop></video>
+  </div>
+{{ else }}
+  <div class="{{ if len .Params | eq 2 }}{{ .Get 1 }}{{ else }}vimeo-container{{ end }}">
+    <video src="{{ .Get 0 }}" allowfullscreen autoplay loop></video>
+  </div>
+{{ end }}
