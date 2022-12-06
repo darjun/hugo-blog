@@ -15,7 +15,7 @@ categories: [
 
 ## 打包资源
 
-使用一个file2byteslice包我们可以将图片和config.json文件打包进二进制程序中，之后编译生成一个二进制程序。然后拷贝这一个文件即可，不用再拷贝图片和其他配置文件了。
+使用file2byteslice包我们可以将图片和config.json文件打包进二进制程序中，之后编译生成一个二进制程序。然后拷贝这一个文件即可，不用再拷贝图片和其他配置文件了。
 
 golang有很多第三方包可以将打包资源，原理其实很简单——读取资源文件的内容，然后生成一个go文件，在这个文件中创建一个变量保存这个文件的二进制内容。
 
@@ -50,10 +50,10 @@ $ file2byteslice -input config.json -output resources/config.go -package resourc
 ```golang
 // alien.go
 func NewAlien(cfg *Config) *Alien {
-	img, _, err := ebitenutil.NewImageFromReader(bytes.NewReader(resources.AlienPng))
-	if err != nil {
-		log.Fatal(err)
-	}
+  img, _, err := ebitenutil.NewImageFromReader(bytes.NewReader(resources.AlienPng))
+  if err != nil {
+    log.Fatal(err)
+  }
   // ...
 }
 ```
@@ -61,10 +61,10 @@ func NewAlien(cfg *Config) *Alien {
 ```golang
 // ship.go
 func NewShip(screenWidth, screenHeight int) *Ship {
-	img, _, err := ebitenutil.NewImageFromReader(bytes.NewReader(resources.ShipPng))
-	if err != nil {
-		log.Fatal(err)
-	}
+  img, _, err := ebitenutil.NewImageFromReader(bytes.NewReader(resources.ShipPng))
+  if err != nil {
+    log.Fatal(err)
+  }
   // ...
 }
 ```
@@ -72,12 +72,12 @@ func NewShip(screenWidth, screenHeight int) *Ship {
 ```golang
 // config.go
 func loadConfig() *Config {
-	var cfg Config
-	if err := json.NewDecoder(bytes.NewReader(resources.ConfigJson)).Decode(&cfg); err != nil {
-		log.Fatalf("json.Decode failed: %v\n", err)
-	}
+  var cfg Config
+  if err := json.NewDecoder(bytes.NewReader(resources.ConfigJson)).Decode(&cfg); err != nil {
+    log.Fatalf("json.Decode failed: %v\n", err)
+  }
 
-	return &cfg
+  return &cfg
 }
 ```
 
@@ -89,7 +89,7 @@ $ go build -o alien_invasion
 
 ### go generate
 
-前面先安装file2byteslice程序，然后一个命令一个命令地执行打包，操作起来很不方便。如果有文件修改，这个过程又需要来一次。
+前面先安装file2byteslice程序，然后一个命令一个命令地执行打包，操作起来很是繁琐。如果有文件修改，这个过程又需要来一次。
 
 实际上，我们可以使用`go generate`让上面的过程更智能一点。在main.go文件中添加如下几行注释：
 
@@ -123,14 +123,14 @@ Go提供的胶水代码，将位于`$GOROOT/misc/wasm`目录下的wasm_exec.html
 package main
 
 import (
-	"log"
-	"net/http"
+  "log"
+  "net/http"
 )
 
 func main() {
-	if err := http.ListenAndServe(":8080", http.FileServer(http.Dir("."))); err != nil {
-		log.Fatal(err)
-	}
+  if err := http.ListenAndServe(":8080", http.FileServer(http.Dir("."))); err != nil {
+    log.Fatal(err)
+  }
 }
 ```
 

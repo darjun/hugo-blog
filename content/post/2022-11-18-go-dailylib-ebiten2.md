@@ -35,23 +35,23 @@ x = W1 - W2/2
 
 ```golang
 func (i *Input) Update(ship *Ship, cfg *Config) {
-	if ebiten.IsKeyPressed(ebiten.KeyLeft) {
-		ship.x -= cfg.ShipSpeedFactor
-		if ship.x < -float64(ship.width)/2 {
-			ship.x = -float64(ship.width) / 2
-		}
-	} else if ebiten.IsKeyPressed(ebiten.KeyRight) {
-		ship.x += cfg.ShipSpeedFactor
-		if ship.x > float64(cfg.ScreenWidth)-float64(ship.width)/2 {
-			ship.x = float64(cfg.ScreenWidth) - float64(ship.width)/2
-		}
-	}
+  if ebiten.IsKeyPressed(ebiten.KeyLeft) {
+    ship.x -= cfg.ShipSpeedFactor
+    if ship.x < -float64(ship.width)/2 {
+      ship.x = -float64(ship.width) / 2
+    }
+  } else if ebiten.IsKeyPressed(ebiten.KeyRight) {
+    ship.x += cfg.ShipSpeedFactor
+    if ship.x > float64(cfg.ScreenWidth)-float64(ship.width)/2 {
+      ship.x = float64(cfg.ScreenWidth) - float64(ship.width)/2
+    }
+  }
 }
 ```
 
 运行结果如下：
 
-![](/img/in-post/godailylib/ebiten13.gif)
+![](/img/in-post/godailylib/ebiten13.gif#center)
 
 ## 发射子弹
 
@@ -75,27 +75,27 @@ func (i *Input) Update(ship *Ship, cfg *Config) {
 
 ```golang
 type Bullet struct {
-	image       *ebiten.Image
-	width       int
-	height      int
-	x           float64
-	y           float64
-	speedFactor float64
+  image       *ebiten.Image
+  width       int
+  height      int
+  x           float64
+  y           float64
+  speedFactor float64
 }
 
 func NewBullet(cfg *Config, ship *Ship) *Bullet {
-	rect := image.Rect(0, 0, cfg.BulletWidth, cfg.BulletHeight)
-	img := ebiten.NewImageWithOptions(rect, nil)
-	img.Fill(cfg.BulletColor)
+  rect := image.Rect(0, 0, cfg.BulletWidth, cfg.BulletHeight)
+  img := ebiten.NewImageWithOptions(rect, nil)
+  img.Fill(cfg.BulletColor)
 
-	return &Bullet{
-		image:       img,
-		width:       cfg.BulletWidth,
-		height:      cfg.BulletHeight,
-		x:           ship.x + float64(ship.width-cfg.BulletWidth)/2,
-		y:           float64(cfg.ScreenHeight - ship.height - cfg.BulletHeight),
-		speedFactor: cfg.BulletSpeedFactor,
-	}
+  return &Bullet{
+    image:       img,
+    width:       cfg.BulletWidth,
+    height:      cfg.BulletHeight,
+    x:           ship.x + float64(ship.width-cfg.BulletWidth)/2,
+    y:           float64(cfg.ScreenHeight - ship.height - cfg.BulletHeight),
+    speedFactor: cfg.BulletSpeedFactor,
+  }
 }
 ```
 
@@ -107,9 +107,9 @@ func NewBullet(cfg *Config, ship *Ship) *Bullet {
 
 ```golang
 func (bullet *Bullet) Draw(screen *ebiten.Image) {
-	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Translate(bullet.x, bullet.y)
-	screen.DrawImage(bullet.image, op)
+  op := &ebiten.DrawImageOptions{}
+  op.GeoM.Translate(bullet.x, bullet.y)
+  screen.DrawImage(bullet.image, op)
 }
 ```
 
@@ -117,15 +117,15 @@ func (bullet *Bullet) Draw(screen *ebiten.Image) {
 
 ```golang
 type Game struct {
-	// -------省略-------
-	bullets map[*Bullet]struct{}
+  // -------省略-------
+  bullets map[*Bullet]struct{}
 }
 
 func NewGame() *Game {
-	return &Game{
-		// -------省略-------
-		bullets: make(map[*Bullet]struct{}),
-	}
+  return &Game{
+    // -------省略-------
+    bullets: make(map[*Bullet]struct{}),
+  }
 }
 ```
 
@@ -133,11 +133,11 @@ func NewGame() *Game {
 
 ```golang
 func (g *Game) Draw(screen *ebiten.Image) {
-	screen.Fill(g.cfg.BgColor)
-	g.ship.Draw(screen)
-	for bullet := range g.bullets {
-		bullet.Draw(screen)
-	}
+  screen.Fill(g.cfg.BgColor)
+  g.ship.Draw(screen)
+  for bullet := range g.bullets {
+    bullet.Draw(screen)
+  }
 }
 ```
 
@@ -145,10 +145,10 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 ```golang
 func (g *Game) Update() error {
-	for bullet := range g.bullets {
-		bullet.y -= bullet.speedFactor
-	}
-	// -------省略-------
+  for bullet := range g.bullets {
+    bullet.y -= bullet.speedFactor
+  }
+  // -------省略-------
 }
 ```
 
@@ -156,14 +156,14 @@ func (g *Game) Update() error {
 
 ```golang
 func (i *Input) Update(g *Game) {
-	if ebiten.IsKeyPressed(ebiten.KeyLeft) {
-		// -------省略-------
-	} else if ebiten.IsKeyPressed(ebiten.KeyRight) {
-		// -------省略-------
-	} else if ebiten.IsKeyPressed(ebiten.KeySpace) {
-		bullet := NewBullet(g.cfg, g.ship)
-		g.addBullet(bullet)
-	}
+  if ebiten.IsKeyPressed(ebiten.KeyLeft) {
+    // -------省略-------
+  } else if ebiten.IsKeyPressed(ebiten.KeyRight) {
+    // -------省略-------
+  } else if ebiten.IsKeyPressed(ebiten.KeySpace) {
+    bullet := NewBullet(g.cfg, g.ship)
+    g.addBullet(bullet)
+  }
 }
 ```
 
@@ -171,17 +171,13 @@ func (i *Input) Update(g *Game) {
 
 ```golang
 func (g *Game) addBullet(bullet *Bullet) {
-	g.bullets[bullet] = struct{}{}
+  g.bullets[bullet] = struct{}{}
 }
 ```
 
-运行：
-
-![](/img/in-post/godailylib/ebiten14.gif)
-
 目前有两个问题：
 
-* 无法一边移动一边发射，仔细看看`Input.Update`方法中的代码，你能发现什么问题码？
+* 无法一边移动一边发射，仔细看看`Input.Update`方法中的代码，你能发现什么问题吗？
 * 子弹太多了，我们想要限制子弹的数量。
 
 下面来逐一解决这些问题。
@@ -190,11 +186,11 @@ func (g *Game) addBullet(bullet *Bullet) {
 
 ```golang
 func (i *Input) Update(g *Game) {
-	// -------省略-------
-	if ebiten.IsKeyPressed(ebiten.KeySpace) {
-		bullet := NewBullet(g.cfg, g.ship)
-		g.addBullet(bullet)
-	}
+  // -------省略-------
+  if ebiten.IsKeyPressed(ebiten.KeySpace) {
+    bullet := NewBullet(g.cfg, g.ship)
+    g.addBullet(bullet)
+  }
 }
 ```
 
@@ -208,7 +204,7 @@ func (i *Input) Update(g *Game) {
 
 ```golang
 type Config struct {
-	MaxBulletNum      int        `json:"maxBulletNum"`
+  MaxBulletNum      int        `json:"maxBulletNum"`
 }
 ```
 
@@ -216,16 +212,16 @@ type Config struct {
 
 ```golang
 if ebiten.IsKeyPressed(ebiten.KeySpace) {
-	if len(g.bullets) < cfg.MaxBulletNum {
-		bullet := NewBullet(g.cfg, g.ship)
-		g.addBullet(bullet)
-	}
+  if len(g.bullets) < cfg.MaxBulletNum {
+    bullet := NewBullet(g.cfg, g.ship)
+    g.addBullet(bullet)
+  }
 }
 ```
 
 再次运行：
 
-![](/img/in-post/godailylib/ebiten15.gif)
+![](/img/in-post/godailylib/ebiten15.gif#center)
 
 数量好像被限制了，但是不是我们配置的10。原来`Input.Update()`的调用间隔太短了，导致我们一次space按键会发射多个子弹。我们可以控制两个子弹之间的时间间隔。同样用配置文件来控制（单位毫秒）：
 
@@ -237,7 +233,7 @@ if ebiten.IsKeyPressed(ebiten.KeySpace) {
 
 ```golang
 type Config struct {
-	BulletInterval    int64      `json:"bulletInterval"`
+  BulletInterval    int64      `json:"bulletInterval"`
 }
 ```
 
@@ -245,7 +241,7 @@ type Config struct {
 
 ```golang
 type Input struct {
-	lastBulletTime time.Time
+  lastBulletTime time.Time
 }
 ```
 
@@ -253,33 +249,33 @@ type Input struct {
 
 ```golang
 func (i *Input) Update(g *Game) {
-	// -------省略-------
-	if ebiten.IsKeyPressed(ebiten.KeySpace) {
-		if len(g.bullets) < g.cfg.MaxBulletNum &&
-			time.Now().Sub(i.lastBulletTime).Milliseconds() > g.cfg.BulletInterval {
-			bullet := NewBullet(g.cfg, g.ship)
-			g.addBullet(bullet)
-			i.lastBulletTime = time.Now()
-		}
-	}
+  // -------省略-------
+  if ebiten.IsKeyPressed(ebiten.KeySpace) {
+    if len(g.bullets) < g.cfg.MaxBulletNum &&
+      time.Now().Sub(i.lastBulletTime).Milliseconds() > g.cfg.BulletInterval {
+      bullet := NewBullet(g.cfg, g.ship)
+      g.addBullet(bullet)
+      i.lastBulletTime = time.Now()
+    }
+  }
 }
 ```
 
 运行：
 
-![](/img/in-post/godailylib/ebiten16.gif)
+![](/img/in-post/godailylib/ebiten16.gif#center)
 
 又出现了一个问题，10个子弹飞出屏幕外之后还是不能发射子弹。我们需要把离开屏幕的子弹删除。这适合在`Game.Update`函数中做：
 
 ```golang
 func (g *Game) Update() error {
-	g.input.Update(g)
-	for bullet := range g.bullets {
-		if bullet.outOfScreen() {
-			delete(g.bullets, bullet)
-		}
-	}
-	return nil
+  g.input.Update(g)
+  for bullet := range g.bullets {
+    if bullet.outOfScreen() {
+      delete(g.bullets, bullet)
+    }
+  }
+  return nil
 }
 ```
 
@@ -287,13 +283,13 @@ func (g *Game) Update() error {
 
 ```golang
 func (bullet *Bullet) outOfScreen() bool {
-	return bullet.y < -float64(bullet.height)
+  return bullet.y < -float64(bullet.height)
 }
 ```
 
 再次运行：
 
-![](/img/in-post/godailylib/ebiten17.gif)
+![](/img/in-post/godailylib/ebiten17.gif#center)
 
 ## 外星人来了
 
@@ -305,35 +301,35 @@ func (bullet *Bullet) outOfScreen() bool {
 
 ```golang
 type Alien struct {
-	image       *ebiten.Image
-	width       int
-	height      int
-	x           float64
-	y           float64
-	speedFactor float64
+  image       *ebiten.Image
+  width       int
+  height      int
+  x           float64
+  y           float64
+  speedFactor float64
 }
 
 func NewAlien(cfg *Config) *Alien {
-	img, _, err := ebitenutil.NewImageFromFile("../images/alien.png")
-	if err != nil {
-		log.Fatal(err)
-	}
+  img, _, err := ebitenutil.NewImageFromFile("../images/alien.png")
+  if err != nil {
+    log.Fatal(err)
+  }
 
-	width, height := img.Size()
-	return &Alien{
-		image:       img,
-		width:       width,
-		height:      height,
-		x:           0,
-		y:           0,
-		speedFactor: cfg.AlienSpeedFactor,
-	}
+  width, height := img.Size()
+  return &Alien{
+    image:       img,
+    width:       width,
+    height:      height,
+    x:           0,
+    y:           0,
+    speedFactor: cfg.AlienSpeedFactor,
+  }
 }
 
 func (alien *Alien) Draw(screen *ebiten.Image) {
-	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Translate(alien.x, alien.y)
-	screen.DrawImage(alien.image, op)
+  op := &ebiten.DrawImageOptions{}
+  op.GeoM.Translate(alien.x, alien.y)
+  screen.DrawImage(alien.image, op)
 }
 ```
 
@@ -341,31 +337,31 @@ func (alien *Alien) Draw(screen *ebiten.Image) {
 
 ```golang
 type Game struct {
-	// Game结构中的map用来存储外星人对象
-	aliens  map[*Alien]struct{}
+  // Game结构中的map用来存储外星人对象
+  aliens  map[*Alien]struct{}
 }
 
 func NewGame() *Game {
-	g := &Game{
-		// 创建map
-		aliens:  make(map[*Alien]struct{}),
-	}
-	// 调用 CreateAliens 创建一组外星人
-	g.CreateAliens()
-	return g
+  g := &Game{
+    // 创建map
+    aliens:  make(map[*Alien]struct{}),
+  }
+  // 调用 CreateAliens 创建一组外星人
+  g.CreateAliens()
+  return g
 }
 
 func (g *Game) CreateAliens() {
-	alien := NewAlien(g.cfg)
+  alien := NewAlien(g.cfg)
 
-	availableSpaceX := g.cfg.ScreenWidth - 2*alien.width
-	numAliens := availableSpaceX / (2 * alien.width)
+  availableSpaceX := g.cfg.ScreenWidth - 2*alien.width
+  numAliens := availableSpaceX / (2 * alien.width)
 
-	for i := 0; i < numAliens; i++ {
-		alien = NewAlien(g.cfg)
-		alien.x = float64(alien.width + 2*alien.width*i)
-		g.addAlien(alien)
-	}
+  for i := 0; i < numAliens; i++ {
+    alien = NewAlien(g.cfg)
+    alien.x = float64(alien.width + 2*alien.width*i)
+    g.addAlien(alien)
+  }
 }
 ```
 
@@ -387,10 +383,10 @@ numAliens := availableSpaceX / (2 * alien.width)
 
 ```golang
 func (g *Game) Draw(screen *ebiten.Image) {
-	// -------省略-------
-	for alien := range g.aliens {
-		alien.Draw(screen)
-	}
+  // -------省略-------
+  for alien := range g.aliens {
+    alien.Draw(screen)
+  }
 }
 ```
 
@@ -402,15 +398,15 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 ```golang
 func (g *Game) CreateAliens() {
-	// -------省略-------
-	for row := 0; row < 2; row++ {
-		for i := 0; i < numAliens; i++ {
-			alien = NewAlien(g.cfg)
-			alien.x = float64(alien.width + 2*alien.width*i)
-			alien.y = float64(alien.height*row) * 1.5
-			g.addAlien(alien)
-		}
-	}
+  // -------省略-------
+  for row := 0; row < 2; row++ {
+    for i := 0; i < numAliens; i++ {
+      alien = NewAlien(g.cfg)
+      alien.x = float64(alien.width + 2*alien.width*i)
+      alien.y = float64(alien.height*row) * 1.5
+      g.addAlien(alien)
+    }
+  }
 }
 ```
 
@@ -418,15 +414,15 @@ func (g *Game) CreateAliens() {
 
 ```golang
 func (g *Game) Update() error {
-	// -------省略-------
-	for alien := range g.aliens {
-		alien.y += alien.speedFactor
-	}
-	// -------省略-------
+  // -------省略-------
+  for alien := range g.aliens {
+    alien.y += alien.speedFactor
+  }
+  // -------省略-------
 }
 ```
 
-![](/img/in-post/godailylib/ebiten19.gif#center)
+![](/img/in-post/godailylib/ebiten19.gif#center#center)
 
 ## 射击！！
 
@@ -435,33 +431,33 @@ func (g *Game) Update() error {
 ```golang
 // CheckCollision 检查子弹和外星人之间是否有碰撞
 func CheckCollision(bullet *Bullet, alien *Alien) bool {
-	alienTop, alienLeft := alien.y, alien.x
-	alienBottom, alienRight := alien.y+float64(alien.height), alien.x+float64(alien.width)
-	// 左上角
-	x, y := bullet.x, bullet.y
-	if y > alienTop && y < alienBottom && x > alienLeft && x < alienRight {
-		return true
-	}
+  alienTop, alienLeft := alien.y, alien.x
+  alienBottom, alienRight := alien.y+float64(alien.height), alien.x+float64(alien.width)
+  // 左上角
+  x, y := bullet.x, bullet.y
+  if y > alienTop && y < alienBottom && x > alienLeft && x < alienRight {
+    return true
+  }
 
-	// 右上角
-	x, y = bullet.x+float64(bullet.width), bullet.y
-	if y > alienTop && y < alienBottom && x > alienLeft && x < alienRight {
-		return true
-	}
+  // 右上角
+  x, y = bullet.x+float64(bullet.width), bullet.y
+  if y > alienTop && y < alienBottom && x > alienLeft && x < alienRight {
+    return true
+  }
 
-	// 左下角
-	x, y = bullet.x, bullet.y+float64(bullet.height)
-	if y > alienTop && y < alienBottom && x > alienLeft && x < alienRight {
-		return true
-	}
+  // 左下角
+  x, y = bullet.x, bullet.y+float64(bullet.height)
+  if y > alienTop && y < alienBottom && x > alienLeft && x < alienRight {
+    return true
+  }
 
-	// 右下角
-	x, y = bullet.x+float64(bullet.width), bullet.y+float64(bullet.height)
-	if y > alienTop && y < alienBottom && x > alienLeft && x < alienRight {
-		return true
-	}
+  // 右下角
+  x, y = bullet.x+float64(bullet.width), bullet.y+float64(bullet.height)
+  if y > alienTop && y < alienBottom && x > alienLeft && x < alienRight {
+    return true
+  }
 
-	return false
+  return false
 }
 ```
 
@@ -469,39 +465,39 @@ func CheckCollision(bullet *Bullet, alien *Alien) bool {
 
 ```golang
 func (g *Game) CheckCollision() {
-	for alien := range g.aliens {
-		for bullet := range g.bullets {
-			if CheckCollision(bullet, alien) {
-				delete(g.aliens, alien)
-				delete(g.bullets, bullet)
-			}
-		}
-	}
+  for alien := range g.aliens {
+    for bullet := range g.bullets {
+      if CheckCollision(bullet, alien) {
+        delete(g.aliens, alien)
+        delete(g.bullets, bullet)
+      }
+    }
+  }
 }
 
 func (g *Game) Update() error {
-	// -------省略-------
+  // -------省略-------
 
-	g.CheckCollision()
+  g.CheckCollision()
 
-	// -------省略-------
-	return nil
+  // -------省略-------
+  return nil
 }
 ```
 
 注意将碰撞检测放在位置更新之后。运行：
 
-![](/img/in-post/godailylib/ebiten20.gif#center)
+![](/img/in-post/godailylib/ebiten20.gif#center#center)
 
 ## 增加主界面和结束界面
 
-现在一旦运行程序，外星人们就开始往下掉了。我们想要增加一个按下空格键才开始的功能，并且游戏结束之后，我们也希望能显示一个Game Over的界面。首先，我们定义几个常量，表示游戏当前所处的状态：
+现在一旦运行程序，外星人们就开始运动了。我们想要增加一个按下空格键才开始的功能，并且游戏结束之后，我们也希望能显示一个Game Over的界面。首先，我们定义几个常量，表示游戏当前所处的状态：
 
 ```golang
 const (
-	ModeTitle Mode = iota
-	ModeGame
-	ModeOver
+  ModeTitle Mode = iota
+  ModeGame
+  ModeOver
 )
 ```
 
@@ -509,8 +505,8 @@ Game结构中需要增加mode字段表示当前游戏所处的状态：
 
 ```golang
 type Game struct {
-	mode    Mode
-	// ...
+  mode    Mode
+  // ...
 }
 ```
 
@@ -518,41 +514,41 @@ type Game struct {
 
 ```golang
 var (
-	titleArcadeFont font.Face
-	arcadeFont      font.Face
-	smallArcadeFont font.Face
+  titleArcadeFont font.Face
+  arcadeFont      font.Face
+  smallArcadeFont font.Face
 )
 
 func (g *Game) CreateFonts() {
-	tt, err := opentype.Parse(fonts.PressStart2P_ttf)
-	if err != nil {
-		log.Fatal(err)
-	}
-	const dpi = 72
-	titleArcadeFont, err = opentype.NewFace(tt, &opentype.FaceOptions{
-		Size:    float64(g.cfg.TitleFontSize),
-		DPI:     dpi,
-		Hinting: font.HintingFull,
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-	arcadeFont, err = opentype.NewFace(tt, &opentype.FaceOptions{
-		Size:    float64(g.cfg.FontSize),
-		DPI:     dpi,
-		Hinting: font.HintingFull,
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-	smallArcadeFont, err = opentype.NewFace(tt, &opentype.FaceOptions{
-		Size:    float64(g.cfg.SmallFontSize),
-		DPI:     dpi,
-		Hinting: font.HintingFull,
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
+  tt, err := opentype.Parse(fonts.PressStart2P_ttf)
+  if err != nil {
+    log.Fatal(err)
+  }
+  const dpi = 72
+  titleArcadeFont, err = opentype.NewFace(tt, &opentype.FaceOptions{
+    Size:    float64(g.cfg.TitleFontSize),
+    DPI:     dpi,
+    Hinting: font.HintingFull,
+  })
+  if err != nil {
+    log.Fatal(err)
+  }
+  arcadeFont, err = opentype.NewFace(tt, &opentype.FaceOptions{
+    Size:    float64(g.cfg.FontSize),
+    DPI:     dpi,
+    Hinting: font.HintingFull,
+  })
+  if err != nil {
+    log.Fatal(err)
+  }
+  smallArcadeFont, err = opentype.NewFace(tt, &opentype.FaceOptions{
+    Size:    float64(g.cfg.SmallFontSize),
+    DPI:     dpi,
+    Hinting: font.HintingFull,
+  })
+  if err != nil {
+    log.Fatal(err)
+  }
 }
 ```
 
@@ -560,14 +556,14 @@ func (g *Game) CreateFonts() {
 
 ```golang
 func (g *Game) init() {
-	g.CreateAliens()
-	g.CreateFonts()
+  g.CreateAliens()
+  g.CreateFonts()
 }
 
 func NewGame() *Game {
-	// ...
-	g.init()
-	return g
+  // ...
+  g.init()
+  return g
 }
 ```
 
@@ -575,34 +571,34 @@ func NewGame() *Game {
 
 ```golang
 func (g *Game) Draw(screen *ebiten.Image) {
-	screen.Fill(g.cfg.BgColor)
+  screen.Fill(g.cfg.BgColor)
 
-	var titleTexts []string
-	var texts []string
-	switch g.mode {
-	case ModeTitle:
-		titleTexts = []string{"ALIEN INVASION"}
-		texts = []string{"", "", "", "", "", "", "", "PRESS SPACE KEY", "", "OR LEFT MOUSE"}
-	case ModeGame:
-		g.ship.Draw(screen)
-		for bullet := range g.bullets {
-			bullet.Draw(screen)
-		}
-		for alien := range g.aliens {
-			alien.Draw(screen)
-		}
-	case ModeOver:
-		texts = []string{"", "GAME OVER!"}
-	}
+  var titleTexts []string
+  var texts []string
+  switch g.mode {
+  case ModeTitle:
+    titleTexts = []string{"ALIEN INVASION"}
+    texts = []string{"", "", "", "", "", "", "", "PRESS SPACE KEY", "", "OR LEFT MOUSE"}
+  case ModeGame:
+    g.ship.Draw(screen)
+    for bullet := range g.bullets {
+      bullet.Draw(screen)
+    }
+    for alien := range g.aliens {
+      alien.Draw(screen)
+    }
+  case ModeOver:
+    texts = []string{"", "GAME OVER!"}
+  }
 
-	for i, l := range titleTexts {
-		x := (g.cfg.ScreenWidth - len(l)*g.cfg.TitleFontSize) / 2
-		text.Draw(screen, l, titleArcadeFont, x, (i+4)*g.cfg.TitleFontSize, color.White)
-	}
-	for i, l := range texts {
-		x := (g.cfg.ScreenWidth - len(l)*g.cfg.FontSize) / 2
-		text.Draw(screen, l, arcadeFont, x, (i+4)*g.cfg.FontSize, color.White)
-	}
+  for i, l := range titleTexts {
+    x := (g.cfg.ScreenWidth - len(l)*g.cfg.TitleFontSize) / 2
+    text.Draw(screen, l, titleArcadeFont, x, (i+4)*g.cfg.TitleFontSize, color.White)
+  }
+  for i, l := range texts {
+    x := (g.cfg.ScreenWidth - len(l)*g.cfg.FontSize) / 2
+    text.Draw(screen, l, arcadeFont, x, (i+4)*g.cfg.FontSize, color.White)
+  }
 }
 ```
 
@@ -610,37 +606,37 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 ```golang
 func (g *Game) Update() error {
-	switch g.mode {
-	case ModeTitle:
-		if g.input.IsKeyPressed() {
-			g.mode = ModeGame
-		}
-	case ModeGame:
-		for bullet := range g.bullets {
-			bullet.y -= bullet.speedFactor
-		}
+  switch g.mode {
+  case ModeTitle:
+    if g.input.IsKeyPressed() {
+      g.mode = ModeGame
+    }
+  case ModeGame:
+    for bullet := range g.bullets {
+      bullet.y -= bullet.speedFactor
+    }
 
-		for alien := range g.aliens {
-			alien.y += alien.speedFactor
-		}
+    for alien := range g.aliens {
+      alien.y += alien.speedFactor
+    }
 
-		g.input.Update(g)
+    g.input.Update(g)
 
-		g.CheckCollision()
+    g.CheckCollision()
 
-		for bullet := range g.bullets {
-			if bullet.outOfScreen() {
-				delete(g.bullets, bullet)
-			}
-		}
-	case ModeOver:
-		if g.input.IsKeyPressed() {
-			g.init()
-			g.mode = ModeTitle
-		}
-	}
+    for bullet := range g.bullets {
+      if bullet.outOfScreen() {
+        delete(g.bullets, bullet)
+      }
+    }
+  case ModeOver:
+    if g.input.IsKeyPressed() {
+      g.init()
+      g.mode = ModeTitle
+    }
+  }
 
-	return nil
+  return nil
 }
 ```
 
@@ -653,8 +649,8 @@ input.go中增加`IsKeyPressed`方法判断是否有空格或鼠标左键按下�
 首先增加一个字段`failCount`用于记录移出屏幕外的外星人数量和与飞船碰撞的外星人数量之和：
 ```golang
 type Game struct {
-	// -------省略-------
-	failCount int // 被外星人碰撞和移出屏幕的外星人数量之和
+  // -------省略-------
+  failCount int // 被外星人碰撞和移出屏幕的外星人数量之和
 }
 ```
 
@@ -662,17 +658,17 @@ type Game struct {
 
 ```golang
 for alien := range g.aliens {
-	if alien.outOfScreen(g.cfg) {
-		g.failCount++
-		delete(g.aliens, alien)
-		continue
-	}
+  if alien.outOfScreen(g.cfg) {
+    g.failCount++
+    delete(g.aliens, alien)
+    continue
+  }
 
-	if CheckCollision(alien, g.ship) {
-		g.failCount++
-		delete(g.aliens, alien)
-		continue
-	}
+  if CheckCollision(alien, g.ship) {
+    g.failCount++
+    delete(g.aliens, alien)
+    continue
+  }
 }
 ```
 
@@ -682,26 +678,26 @@ for alien := range g.aliens {
 
 ```golang
 type GameObject struct {
-	width  int
-	height int
-	x      float64
-	y      float64
+  width  int
+  height int
+  x      float64
+  y      float64
 }
 
 func (gameObj *GameObject) Width() int {
-	return gameObj.width
+  return gameObj.width
 }
 
 func (gameObj *GameObject) Height() int {
-	return gameObj.height
+  return gameObj.height
 }
 
 func (gameObj *GameObject) X() float64 {
-	return gameObj.x
+  return gameObj.x
 }
 
 func (gameObj *GameObject) Y() float64 {
-	return gameObj.y
+  return gameObj.y
 }
 ```
 
@@ -709,10 +705,10 @@ func (gameObj *GameObject) Y() float64 {
 
 ```golang
 type Entity interface {
-	Width() int
-	Height() int
-	X() float64
-	Y() float64
+  Width() int
+  Height() int
+  X() float64
+  Y() float64
 }
 ```
 
@@ -720,9 +716,9 @@ type Entity interface {
 
 ```golang
 type Alien struct {
-	GameObject
-	image       *ebiten.Image
-	speedFactor float64
+  GameObject
+  image       *ebiten.Image
+  speedFactor float64
 }
 ```
 
@@ -731,33 +727,33 @@ type Alien struct {
 ```golang
 // CheckCollision 两个物体之间是否碰撞
 func CheckCollision(entityA, entityB Entity) bool {
-	top, left := entityA.Y(), entityA.X()
-	bottom, right := entityA.Y()+float64(entityA.Height()), entityA.X()+float64(entityA.Width())
-	// 左上角
-	x, y := entityB.X(), entityB.Y()
-	if y > top && y < bottom && x > left && x < right {
-		return true
-	}
+  top, left := entityA.Y(), entityA.X()
+  bottom, right := entityA.Y()+float64(entityA.Height()), entityA.X()+float64(entityA.Width())
+  // 左上角
+  x, y := entityB.X(), entityB.Y()
+  if y > top && y < bottom && x > left && x < right {
+    return true
+  }
 
-	// 右上角
-	x, y = entityB.X()+float64(entityB.Width()), entityB.Y()
-	if y > top && y < bottom && x > left && x < right {
-		return true
-	}
+  // 右上角
+  x, y = entityB.X()+float64(entityB.Width()), entityB.Y()
+  if y > top && y < bottom && x > left && x < right {
+    return true
+  }
 
-	// 左下角
-	x, y = entityB.X(), entityB.Y()+float64(entityB.Height())
-	if y > top && y < bottom && x > left && x < right {
-		return true
-	}
+  // 左下角
+  x, y = entityB.X(), entityB.Y()+float64(entityB.Height())
+  if y > top && y < bottom && x > left && x < right {
+    return true
+  }
 
-	// 右下角
-	x, y = entityB.X()+float64(entityB.Width()), entityB.Y()+float64(entityB.Height())
-	if y > top && y < bottom && x > left && x < right {
-		return true
-	}
+  // 右下角
+  x, y = entityB.X()+float64(entityB.Width()), entityB.Y()+float64(entityB.Height())
+  if y > top && y < bottom && x > left && x < right {
+    return true
+  }
 
-	return false
+  return false
 }
 ```
 
@@ -765,21 +761,21 @@ func CheckCollision(entityA, entityB Entity) bool {
 
 ```golang
 if g.failCount >= 3 {
-	g.overMsg = "Game Over!"
+  g.overMsg = "Game Over!"
 } else if len(g.aliens) == 0 {
-	g.overMsg = "You Win!"
+  g.overMsg = "You Win!"
 }
 
 if len(g.overMsg) > 0 {
-	g.mode = ModeOver
-	g.aliens = make(map[*Alien]struct{})
-	g.bullets = make(map[*Bullet]struct{})
+  g.mode = ModeOver
+  g.aliens = make(map[*Alien]struct{})
+  g.bullets = make(map[*Bullet]struct{})
 }
 ```
 
 注意，为了下次游戏能顺序进行，这里需要清楚所有的子弹和外星人。运行：
 
-![](/img/in-post/godailylib/ebiten21.gif#center)
+![](/img/in-post/godailylib/ebiten21.gif#center#center)
 
 ## 总结
 
