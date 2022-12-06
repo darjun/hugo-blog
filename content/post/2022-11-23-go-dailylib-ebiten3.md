@@ -146,7 +146,7 @@ $ go run main.go
 
 点击run按钮即可愉快地玩耍啦！
 
-![](/img/in-post/godailylib/ebiten26.mp4#center)
+![](/img/in-post/godailylib/ebiten26.gif#center)
 
 ## 项目的不足
 

@@ -492,7 +492,7 @@ func (g *Game) Update() error {
 
 好了，现在可以运行程序了`go run .`，效果如下：
 
-{{< vimeo "/img/in-post/godailylib/ebiten10.mp4" "video" >}}
+![](/img/in-post/godailylib/ebiten10.gif#center)
 
 注意到，目前有两个问题：
 * 移动太慢
@@ -547,7 +547,7 @@ func (g *Game) Update() error {
 
 运行，是不是快了很多呢？
 
-{{< vimeo "/img/in-post/godailylib/ebiten11.mp4" "video" >}}
+![](/img/in-post/godailylib/ebiten11.gif#center)
 
 ## 总结
 

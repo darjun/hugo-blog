@@ -51,7 +51,7 @@ func (i *Input) Update(ship *Ship, cfg *Config) {
 
 运行结果如下：
 
-![](/img/in-post/godailylib/ebiten13.mp4)
+![](/img/in-post/godailylib/ebiten13.gif)
 
 ## 发射子弹
 
@@ -177,7 +177,7 @@ func (g *Game) addBullet(bullet *Bullet) {
 
 运行：
 
-![](/img/in-post/godailylib/ebiten14.mp4)
+![](/img/in-post/godailylib/ebiten14.gif)
 
 目前有两个问题：
 
@@ -225,7 +225,7 @@ if ebiten.IsKeyPressed(ebiten.KeySpace) {
 
 再次运行：
 
-![](/img/in-post/godailylib/ebiten15.mp4)
+![](/img/in-post/godailylib/ebiten15.gif)
 
 数量好像被限制了，但是不是我们配置的10。原来`Input.Update()`的调用间隔太短了，导致我们一次space按键会发射多个子弹。我们可以控制两个子弹之间的时间间隔。同样用配置文件来控制（单位毫秒）：
 
@@ -267,7 +267,7 @@ func (i *Input) Update(g *Game) {
 
 运行：
 
-![](/img/in-post/godailylib/ebiten16.mp4)
+![](/img/in-post/godailylib/ebiten16.gif)
 
 又出现了一个问题，10个子弹飞出屏幕外之后还是不能发射子弹。我们需要把离开屏幕的子弹删除。这适合在`Game.Update`函数中做：
 
@@ -293,7 +293,7 @@ func (bullet *Bullet) outOfScreen() bool {
 
 再次运行：
 
-![](/img/in-post/godailylib/ebiten17.mp4)
+![](/img/in-post/godailylib/ebiten17.gif)
 
 ## 外星人来了
 
@@ -426,7 +426,7 @@ func (g *Game) Update() error {
 }
 ```
 
-![](/img/in-post/godailylib/ebiten19.mp4#center)
+![](/img/in-post/godailylib/ebiten19.gif#center)
 
 ## 射击！！
 
@@ -491,7 +491,7 @@ func (g *Game) Update() error {
 
 注意将碰撞检测放在位置更新之后。运行：
 
-![](/img/in-post/godailylib/ebiten20.mp4#center)
+![](/img/in-post/godailylib/ebiten20.gif#center)
 
 ## 增加主界面和结束界面
 
@@ -779,7 +779,7 @@ if len(g.overMsg) > 0 {
 
 注意，为了下次游戏能顺序进行，这里需要清楚所有的子弹和外星人。运行：
 
-![](/img/in-post/godailylib/ebiten21.mp4#center)
+![](/img/in-post/godailylib/ebiten21.gif#center)
 
 ## 总结
 
